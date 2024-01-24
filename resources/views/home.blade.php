@@ -16,7 +16,7 @@
           @endif
           <p class="card-text">{{$item->description}}</p>
           <a href="{{route('update', ['id' => $item->id])}}" class="btn btn-primary" data-mdb-ripple-init>Update</a>
-          <a href="{{route('delete', ['id' => $item->id])}}" class="btn btn-primary p-2" data-mdb-ripple-init>
+          <a href="" class="btn btn-primary p-2" data-mdb-ripple-init>
             <button style="border: none; background: none; color: #fff;" onclick="confirmDelete({{ $item->id }})">DELETE</button>
           </a>
         </div>
@@ -28,12 +28,11 @@
 
 @section('js')
 <script>
-    function confirmDelete(productId) {
-        if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
-            var form = document.getElementById('delete-form');
-            form.action = '/products/' + productId;
-            form.submit();
-        }
-    }
+  function confirmDelete(productId) {
+      if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
+          window.location.href = '{{ route("delete", ["id" => ":productId"]) }}'.replace(':productId', productId);
+      }
+  }
 </script>
+
 @endsection
